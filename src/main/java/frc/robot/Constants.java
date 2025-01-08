@@ -25,6 +25,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
+  // When changing Mode.SIM to Mode.REPLAY, also change SimGui default flag in build.gradle
   public static final Mode simMode = Mode.SIM;
   public static final Mode currentMode = RobotBase.isReal() ? Mode.REAL : simMode;
 
