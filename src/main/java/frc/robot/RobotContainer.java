@@ -27,12 +27,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommands;
-import frc.robot.subsystems.PukerSubsystem;
-import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.PukerSubsystem;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -158,7 +156,7 @@ public class RobotContainer {
 
     m_driverController
         .rightTrigger()
-        .onTrue(m_pukerSubsystem.newStartMotorCommand()) 
+        .onTrue(m_pukerSubsystem.newStartMotorCommand())
         .onFalse(m_pukerSubsystem.newStopMotorCommand());
     // Lock to 0° when A button is held
     controller
