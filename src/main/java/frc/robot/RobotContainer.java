@@ -26,6 +26,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(1);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController = new CommandXboxController(
       OperatorConstants.kDriverControllerPort);
@@ -62,11 +64,10 @@ public class RobotContainer {
     // cancelling on release.
 
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    
-    m_driverController.rightTrigger().onTrue(/* TODO */).onFalse(/* TODO */);
-  }
 
-  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(1);
+    m_driverController.rightTrigger().onTrue(m_pukerSubsystem.newStartMotorCommand())
+        .onFalse(m_pukerSubsystem.newStopMotorCommand());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
