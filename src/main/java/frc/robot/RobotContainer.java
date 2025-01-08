@@ -26,8 +26,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.PukerSubsystem;
@@ -53,12 +51,6 @@ public class RobotContainer {
   private final Drive drive;
 
   private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(1);
-  // Controller
-  private final CommandXboxController controller = new CommandXboxController(0);
-
-  private final Vision vision;
-
-  private AutoCommandManager autoCommandManager;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -154,7 +146,7 @@ public class RobotContainer {
 
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController
+    controller
         .rightTrigger()
         .onTrue(m_pukerSubsystem.newStartMotorCommand())
         .onFalse(m_pukerSubsystem.newStopMotorCommand());
