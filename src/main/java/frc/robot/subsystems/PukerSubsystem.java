@@ -8,32 +8,36 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PukerSubsystem extends SubsystemBase {
 
-    private final double MOTOR_DEFAULT_SPEED = 1.0;
+    private final double PUKER_OUTTAKE_SPEED = 1.0;
 
     private TalonFX m_motor;
     private double m_motorSpeed;
 
-    public PukerSubsystem(int id, double m_motorSpeed) {
+    public PukerSubsystem(int id, double motorSpeed) {
         m_motor = new TalonFX(id, "rio");
+        m_motorSpeed = motorSpeed;
     }
 
+    // Overload for default speed if not set
     public PukerSubsystem(int id) {
         m_motor = new TalonFX(id, "rio");
+        m_motorSpeed = PUKER_OUTTAKE_SPEED;
     }
 
     public void setSpeed(double speed) {
         m_motor.set(speed);
     }
 
-    public Command setSpeedCommand(double speed) {
+    public Command newSetSpeedCommand(double speed) {
         return new InstantCommand(() -> setSpeed(speed));
     }
 
-    public Command startMotorCommand() {
-        return setSpeedCommand((m_motorSpeed != 0.0) ? m_motorSpeed : MOTOR_DEFAULT_SPEED);
+    // Method to return a command to start the motor with the set speed
+    public Command newStartMotorCommand() {
+        return newSetSpeedCommand(m_motorSpeed);
     }
 
-    public Command stopMotorCommand() {
-        return setSpeedCommand(0.0);
+    public Command newStopMotorCommand() {
+        return newSetSpeedCommand(0.0);
     }
 }
