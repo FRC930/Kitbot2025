@@ -34,7 +34,7 @@ public class TunerConstants {
   // When using closed-loop control, the drive motor uses the control
   // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
   private static final Slot0Configs driveGains =
-      new Slot0Configs().withKP(0.1).withKI(0).withKD(0).withKS(0).withKV(0.124);
+      new Slot0Configs().withKP(0.1).withKI(0).withKD(0).withKS(0.11854).withKV(0.87260);
 
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
@@ -80,16 +80,16 @@ public class TunerConstants {
 
   // Theoretical free speed (m/s) at 12 V applied output;
   // This needs to be tuned to your individual robot
-  //mk3 Falcon unadjusted speed (13.6 ft/s)
-  public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(4.15); 
+  // mk3 Falcon unadjusted speed (13.6 ft/s)
+  public static final LinearVelocity kSpeedAt12Volts = MetersPerSecond.of(4.15);
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
   // This may need to be tuned to your individual robot
-  private static final double kCoupleRatio = 3.5714285714285716; //TODO Validate, was 0 on old robot
-  
+  private static final double kCoupleRatio =
+      3.5714285714285716; // TODO Validate, was 0 on old robot
 
-  private static final double kDriveGearRatio = 8.16; //Standard mk3 module
-  private static final double kSteerGearRatio = 12.8; //standard mk3 module
+  private static final double kDriveGearRatio = 8.16; // Standard mk3 module
+  private static final double kSteerGearRatio = 12.8; // standard mk3 module
   private static final Distance kWheelRadius = Inches.of(2);
 
   private static final boolean kInvertLeftSide = false;
