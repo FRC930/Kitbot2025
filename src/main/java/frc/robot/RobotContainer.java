@@ -50,7 +50,7 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
 
-  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(1);
+  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20);
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
