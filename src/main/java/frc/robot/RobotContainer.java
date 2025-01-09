@@ -119,7 +119,7 @@ public class RobotContainer {
         break;
     }
 
-    autoCommandManager = new AutoCommandManager(drive);
+    autoCommandManager = new AutoCommandManager(drive, m_pukerSubsystem);
 
     // Configure the button bindings
     configureButtonBindings();
