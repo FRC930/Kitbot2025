@@ -58,7 +58,10 @@ public class RobotContainer {
 
   private final StartInTeleopUtility m_StartInTeleopUtility;
 
-  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20);
+  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20, 0.10);
+
+  private final double DRIVE_SPEED = 0.75;
+  private final double ANGULAR_SPEED = 0.75;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -148,9 +151,9 @@ public class RobotContainer {
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
-            () -> -controller.getLeftY(),
-            () -> -controller.getLeftX(),
-            () -> -controller.getRightX()));
+            () -> -controller.getLeftY() * DRIVE_SPEED,
+            () -> -controller.getLeftX() * DRIVE_SPEED,
+            () -> -controller.getRightX() * ANGULAR_SPEED));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,

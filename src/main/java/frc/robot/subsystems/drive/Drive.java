@@ -13,11 +13,8 @@
 
 package frc.robot.subsystems.drive;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import org.littletonrobotics.junction.AutoLogOutput;
-import org.littletonrobotics.junction.Logger;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.CANBus;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -27,7 +24,6 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import com.pathplanner.lib.util.PathPlannerLogging;
-
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
@@ -44,8 +40,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.system.plant.DCMotor;
-import static edu.wpi.first.units.Units.MetersPerSecond;
-import static edu.wpi.first.units.Units.Volts;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -59,6 +53,10 @@ import frc.robot.Constants;
 import frc.robot.Constants.Mode;
 import frc.robot.generated.TunerConstants;
 import frc.robot.util.LocalADStarAK;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import org.littletonrobotics.junction.AutoLogOutput;
+import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
   // TunerConstants doesn't include these constants, so they are declared locally

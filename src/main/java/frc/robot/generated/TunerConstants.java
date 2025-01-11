@@ -1,5 +1,12 @@
 package frc.robot.generated;
 
+import static edu.wpi.first.units.Units.Amps;
+import static edu.wpi.first.units.Units.Inches;
+import static edu.wpi.first.units.Units.KilogramSquareMeters;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.Rotations;
+import static edu.wpi.first.units.Units.Volts;
+
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -17,16 +24,9 @@ import com.ctre.phoenix6.swerve.SwerveModuleConstants.DriveMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerFeedbackType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.SteerMotorArrangement;
 import com.ctre.phoenix6.swerve.SwerveModuleConstantsFactory;
-
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import static edu.wpi.first.units.Units.Amps;
-import static edu.wpi.first.units.Units.Inches;
-import static edu.wpi.first.units.Units.KilogramSquareMeters;
-import static edu.wpi.first.units.Units.MetersPerSecond;
-import static edu.wpi.first.units.Units.Rotations;
-import static edu.wpi.first.units.Units.Volts;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Distance;
@@ -103,7 +103,7 @@ public class TunerConstants {
   // This needs to be tuned to your individual robot
   // mk3 Falcon unadjusted speed (std: 13.6 ft/s - fast: 16.2 ft/s )
   public static final LinearVelocity kSpeedAt12Volts =
-  // tuned to 4.0
+      // tuned to 4.0
       MetersPerSecond.of(4.0); // std, theory max speed 4.15
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
