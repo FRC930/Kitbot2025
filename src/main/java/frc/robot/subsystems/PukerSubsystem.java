@@ -41,6 +41,10 @@ public class PukerSubsystem extends SubsystemBase {
   }
 
   public Command newStopMotorCommand() {
+    return newSetSpeedCommand(0.0);
+  }
+
+  public Command newReverseMotorCommand() {
     return newSetSpeedCommand(-0.02);
   }
 }
