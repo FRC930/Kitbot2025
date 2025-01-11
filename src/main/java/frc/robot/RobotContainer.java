@@ -19,10 +19,15 @@
  */
 package frc.robot;
 
-import static frc.robot.subsystems.vision.VisionConstants.*;
+import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
+import static frc.robot.subsystems.vision.VisionConstants.camera1Name;
+import static frc.robot.subsystems.vision.VisionConstants.robotToCamera0;
+import static frc.robot.subsystems.vision.VisionConstants.robotToCamera1;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -39,6 +44,7 @@ import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
+import frc.robot.util.StartInTeleopUtility;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -50,6 +56,8 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
 
+  private final StartInTeleopUtility m_StartInTeleopUtility;
+
   private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20);
 
   // Controller
@@ -58,6 +66,8 @@ public class RobotContainer {
   private final Vision vision;
 
   private AutoCommandManager autoCommandManager;
+
+  private boolean m_TeleopInitialized = false;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -118,6 +128,8 @@ public class RobotContainer {
 
         break;
     }
+
+    m_StartInTeleopUtility = new StartInTeleopUtility(drive::setPose);
 
     autoCommandManager = new AutoCommandManager(drive);
 
@@ -197,6 +209,22 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoCommandManager.getAutonomousCommand();
+    Command autoCommand = autoCommandManager.getAutonomousCommand();
+    if (autoCommand != null) {
+      m_StartInTeleopUtility.updateAutonomous();
+    }
+    return autoCommand;
+  }
+
+  public void teleopInit() {
+    if (!this.m_TeleopInitialized) {
+      // Only want to initialize starting position once (if teleop multiple times dont reset pose
+      // again)
+      m_StartInTeleopUtility.updateStartingPosition();
+      m_TeleopInitialized = true;
+      // m_visionUpdatesOdometry = true;
+    }
+    // TODO m_StartInTeleopUtility.updateTags();  when vision finds target/turn off april tags
+    // during auto
   }
 }
