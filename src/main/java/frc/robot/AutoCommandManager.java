@@ -54,8 +54,10 @@ public class AutoCommandManager {
             .raceWith(new WaitCommand(1))
             .andThen(puker.newStopMotorCommand()));
     NamedCommands.registerCommand("stopDrive", DriveCommands.brakeDrive(drivetrain));
-    NamedCommands.registerCommand("printA", new PrintCommand("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%AAAAAAAAAAA"));
-    NamedCommands.registerCommand("printB", new PrintCommand("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%BBBBBBB"));
+    NamedCommands.registerCommand(
+        "printA", new PrintCommand("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%AAAAAAAAAAA"));
+    NamedCommands.registerCommand(
+        "printB", new PrintCommand("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%BBBBBBB"));
   }
 
   public Command getAutonomousCommand() {
