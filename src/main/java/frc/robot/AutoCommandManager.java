@@ -51,7 +51,7 @@ public class AutoCommandManager {
         "troughScoreCommand",
         puker
             .newStartMotorCommand()
-            .raceWith(new WaitCommand(1))
+            .alongWith(new WaitCommand(1))
             .andThen(puker.newStopMotorCommand()));
     NamedCommands.registerCommand("stopDrive", DriveCommands.brakeDrive(drivetrain));
     NamedCommands.registerCommand(
