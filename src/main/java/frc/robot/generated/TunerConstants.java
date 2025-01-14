@@ -54,9 +54,19 @@ public class TunerConstants {
           .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
   // When using closed-loop control, the drive motor uses the control
   // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
-  private static final Slot0Configs driveGains =
-      new Slot0Configs().withKP(0.1).withKI(0).withKD(0).withKS(0.12275).withKV(0.86980);
 
+  private static final Slot0Configs driveGains =
+      // When SysID values multiplied by GearRatio
+      new Slot0Configs()
+          // .withKP(0.1)
+          .withKP(0.17803488) // SysID Results
+          .withKI(0)
+          .withKD(0)
+          // .withKS(0.12275) // Simple FF Characterized
+          .withKS(0.882313872) // SysID Results
+          // .withKV(0.86980) // Simple FF Characterized
+          .withKV(1.153797072) // SysID Results
+          .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
   private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.Voltage;
@@ -103,7 +113,7 @@ public class TunerConstants {
   // This needs to be tuned to your individual robot
   // mk3 Falcon unadjusted speed (std: 13.6 ft/s - fast: 16.2 ft/s )
   public static final LinearVelocity kSpeedAt12Volts =
-  // tuned to 4.0
+      // tuned to 4.0
       MetersPerSecond.of(4.0); // std, theory max speed 4.15
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;

@@ -19,11 +19,6 @@
  */
 package frc.robot;
 
-import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
-import static frc.robot.subsystems.vision.VisionConstants.camera1Name;
-import static frc.robot.subsystems.vision.VisionConstants.robotToCamera0;
-import static frc.robot.subsystems.vision.VisionConstants.robotToCamera1;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -41,6 +36,10 @@ import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.vision.Vision;
+import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
+import static frc.robot.subsystems.vision.VisionConstants.camera1Name;
+import static frc.robot.subsystems.vision.VisionConstants.robotToCamera0;
+import static frc.robot.subsystems.vision.VisionConstants.robotToCamera1;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
@@ -58,7 +57,10 @@ public class RobotContainer {
 
   private final StartInTeleopUtility m_StartInTeleopUtility;
 
-  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20);
+  private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20, 0.10);
+
+  private final double DRIVE_SPEED = 0.75;
+  private final double ANGULAR_SPEED = 0.75;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -148,9 +150,9 @@ public class RobotContainer {
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
-            () -> -controller.getLeftY(),
-            () -> -controller.getLeftX(),
-            () -> -controller.getRightX()));
+            () -> -controller.getLeftY() * DRIVE_SPEED,
+            () -> -controller.getLeftX() * DRIVE_SPEED,
+            () -> -controller.getRightX() * ANGULAR_SPEED));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
@@ -161,7 +163,7 @@ public class RobotContainer {
     controller
         .rightTrigger()
         .onTrue(m_pukerSubsystem.newStartMotorCommand())
-        .onFalse(m_pukerSubsystem.newStopMotorCommand());
+        .onFalse(m_pukerSubsystem.newReverseMotorCommand());
     // Lock to 0° when A button is held
     controller
         .a()
