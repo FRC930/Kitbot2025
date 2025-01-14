@@ -54,9 +54,19 @@ public class TunerConstants {
           .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
   // When using closed-loop control, the drive motor uses the control
   // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
-  private static final Slot0Configs driveGains =
-      new Slot0Configs().withKP(0.1).withKI(0).withKD(0).withKS(0.12275).withKV(0.86980);
 
+  private static final Slot0Configs driveGains =
+      // When SysID values multiplied by GearRatio
+      new Slot0Configs()
+          // .withKP(0.1)
+          .withKP(0.17803488) // SysID Results
+          .withKI(0)
+          .withKD(0)
+          // .withKS(0.12275) // Simple FF Characterized
+          .withKS(0.882313872) // SysID Results
+          // .withKV(0.86980) // Simple FF Characterized
+          .withKV(1.153797072) // SysID Results
+          .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
   private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.Voltage;
