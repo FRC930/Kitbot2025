@@ -25,6 +25,7 @@ public class AutoCommandManager {
     PathPlannerAuto MidScore1 = new PathPlannerAuto("MidScore1");
     PathPlannerAuto MidScore2 = new PathPlannerAuto("MidScore2");
     PathPlannerAuto Circle = new PathPlannerAuto("Circle");
+    PathPlannerAuto Straight = new PathPlannerAuto("Straight");
 
     // Set up SysId routines
     autoChooser.addOption(
@@ -44,6 +45,7 @@ public class AutoCommandManager {
     autoChooser.addOption("MidScore2", MidScore2);
     autoChooser.addOption("MidScore1", MidScore1);
     autoChooser.addOption("Circle", Circle);
+    autoChooser.addOption("Straight", Straight);
   }
 
   public void configureNamedCommands(PukerSubsystem puker, Drive drivetrain) {
