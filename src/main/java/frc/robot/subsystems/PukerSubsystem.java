@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PukerSubsystem extends SubsystemBase {
 
-  private final double PUKER_OUTTAKE_SPEED = 1.0;
+  private final static double PUKER_DEFAULT_OUTTAKE_SPEED = 1.0;
 
   private TalonFX m_motor;
   private double m_motorSpeed;
@@ -22,9 +22,7 @@ public class PukerSubsystem extends SubsystemBase {
 
   // Overload for default speed if not set
   public PukerSubsystem(int id) {
-    m_motor = new TalonFX(id, "rio");
-    m_motor.setInverted(true);
-    m_motorSpeed = PUKER_OUTTAKE_SPEED;
+    this(id, PUKER_DEFAULT_OUTTAKE_SPEED);
   }
 
   public void setSpeed(double speed) {
