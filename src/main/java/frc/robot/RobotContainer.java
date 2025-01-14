@@ -133,7 +133,7 @@ public class RobotContainer {
 
     m_StartInTeleopUtility = new StartInTeleopUtility(drive::setPose);
 
-    autoCommandManager = new AutoCommandManager(drive);
+    autoCommandManager = new AutoCommandManager(drive, m_pukerSubsystem);
 
     // Configure the button bindings
     configureButtonBindings();

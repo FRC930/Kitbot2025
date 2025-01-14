@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PukerSubsystem extends SubsystemBase {
 
-  private final static double PUKER_DEFAULT_OUTTAKE_SPEED = 1.0;
+  private final static double PUKER_DEFAULT_OUTTAKE_SPEED = 0.1;
 
   private TalonFX m_motor;
   private double m_motorSpeed;
