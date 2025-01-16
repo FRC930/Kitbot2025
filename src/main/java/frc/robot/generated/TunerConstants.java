@@ -55,6 +55,11 @@ public class TunerConstants {
   // When using closed-loop control, the drive motor uses the control
   // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
 
+  /* Fast gear ratio for simple drive test
+  * ********** Drive FF Characterization Results **********
+   kS: 0.12930
+   kV: 0.73456
+  */
   private static final Slot0Configs driveGains =
       // When SysID values multiplied by GearRatio
       new Slot0Configs()
@@ -62,10 +67,12 @@ public class TunerConstants {
           .withKP(0.17803488) // SysID Results
           .withKI(0)
           .withKD(0)
-          // .withKS(0.12275) // Simple FF Characterized
-          .withKS(0.882313872) // SysID Results
-          // .withKV(0.86980) // Simple FF Characterized
-          .withKV(1.153797072) // SysID Results
+          // .withKS(0.12275) // STD Simple FF Characterized
+          // .withKS(0.882313872) // SysID Results
+          .withKS(0.12930) // Fast Simple FF Characterized
+          // .withKV(0.86980) // STD Simple FF Characterized
+          // .withKV(1.153797072) // SysID Results
+          .withKV(0.73456) // Fast Simple FF Characterized
           .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
@@ -113,21 +120,24 @@ public class TunerConstants {
   // This needs to be tuned to your individual robot
   // mk3 Falcon unadjusted speed (std: 13.6 ft/s - fast: 16.2 ft/s )
   public static final LinearVelocity kSpeedAt12Volts =
-      // tuned to 4.0
-      MetersPerSecond.of(4.0); // std, theory max speed 4.15
+      // std tuned to 4.0
+      // fast tenued to
+      MetersPerSecond.of(4.4);
+  // fast, theory max speed 4.938
+  // std, theory max speed 4.15
 
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
   // This may need to be tuned to your individual robot
   private static final double kCoupleRatio = 3; // TODO Validate, was 0 on old robot
 
   // https://www.swervedrivespecialties.com/collections/kits/products/mk3-swerve-module?variant=39420432121969
-  private static final double kDriveGearRatio = 8.16; // Standard mk3 module 8.16 std/6.86 fast
+  private static final double kDriveGearRatio = 6.86; // Standard mk3 module 8.16 std/6.86 fast
   private static final double kSteerGearRatio = 12.8; // standard mk3 module
-  //   ********** Wheel Radius Characterization Results **********
-  //   Wheel Delta: 53.015 radians
-  //   Gyro Delta: 9.301 radians
-  //   Wheel Radius: 0.056 meters, 2.203 inches
-  private static final Distance kWheelRadius = Inches.of(2);
+  //  ********** Wheel Radius Characterization Results **********
+  // 	Wheel Delta: 42.081 radians
+  // 	Gyro Delta: 6.075 radians
+  // 	Wheel Radius: 0.046 meters, 1.812 inches
+  private static final Distance kWheelRadius = Inches.of(1.82); // (AVG 3 values)
 
   private static final boolean kInvertLeftSide = false;
   private static final boolean kInvertRightSide = true;
