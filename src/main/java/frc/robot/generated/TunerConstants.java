@@ -64,16 +64,16 @@ public class TunerConstants {
       // When SysID values multiplied by GearRatio
       new Slot0Configs()
           // .withKP(0.1)
-          .withKP(0.17803488) // SysID Results
+          .withKP(0.013097) // SysID Results
           .withKI(0)
           .withKD(0)
           // .withKS(0.12275) // STD Simple FF Characterized
           // .withKS(0.882313872) // SysID Results
-          .withKS(0.12930) // Fast Simple FF Characterized
+          .withKS(0.085885) // Fast Simple FF Characterized
           // .withKV(0.86980) // STD Simple FF Characterized
           // .withKV(1.153797072) // SysID Results
-          .withKV(0.73456) // Fast Simple FF Characterized
-          .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
+          .withKV(0.118253) // Fast Simple FF Characterized
+          .withKA(0.008655167 * TunerConstants.kDriveGearRatio);
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
   private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.Voltage;
