@@ -17,6 +17,7 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.CANBus;
+import com.ctre.phoenix6.SignalLogger;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
@@ -277,14 +278,20 @@ public class Drive extends SubsystemBase {
 
   /** Returns a command to run a quasistatic test in the specified direction. */
   public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
-    return run(() -> runCharacterization(0.0))
+    return run(() -> SignalLogger.start())
+        .andThen(() -> runCharacterization(0.0))
         .withTimeout(1.0)
-        .andThen(sysId.quasistatic(direction));
+        .andThen(sysId.quasistatic(direction))
+        .andThen(() -> SignalLogger.stop());
   }
 
   /** Returns a command to run a dynamic test in the specified direction. */
   public Command sysIdDynamic(SysIdRoutine.Direction direction) {
-    return run(() -> runCharacterization(0.0)).withTimeout(1.0).andThen(sysId.dynamic(direction));
+    return run(() -> SignalLogger.start())
+        .andThen(() -> runCharacterization(0.0))
+        .withTimeout(1.0)
+        .andThen(sysId.dynamic(direction))
+        .andThen(() -> SignalLogger.stop());
   }
 
   /** Returns the module states (turn angles and drive velocities) for all of the modules. */
