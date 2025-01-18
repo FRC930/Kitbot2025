@@ -63,17 +63,17 @@ public class TunerConstants {
   private static final Slot0Configs driveGains =
       // When SysID values multiplied by GearRatio
       new Slot0Configs()
-          // .withKP(0.1)
-          .withKP(0.42803488) // SysID Results
+          // .withKP(0.45987) // From SysID Hoot file motor ID:2
+          .withKP(0.65987)
           .withKI(0)
           .withKD(0)
           // .withKS(0.12275) // STD Simple FF Characterized
           // .withKS(0.882313872) // SysID Results
-          .withKS(0.12930 * TunerConstants.kDriveGearRatio) // Fast Simple FF Characterized
+          .withKS(0.17606) // From SysID Hoot file motor ID:2
           // .withKV(0.86980) // STD Simple FF Characterized
           // .withKV(1.153797072) // SysID Results
-          .withKV(0.73456 * TunerConstants.kDriveGearRatio) // Fast Simple FF Characterized
-          .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
+          .withKV(0.80828) // From SysID Hoot file motor ID:2
+          .withKA(0.061755); // From SysID Hoot file motor ID:2
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors
   private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.Voltage;
@@ -122,7 +122,7 @@ public class TunerConstants {
   public static final LinearVelocity kSpeedAt12Volts =
       // std tuned to 4.0
       // fast tenued to
-      MetersPerSecond.of(4.4);
+      MetersPerSecond.of(4.2);
   // fast, theory max speed 4.938
   // std, theory max speed 4.15
 
