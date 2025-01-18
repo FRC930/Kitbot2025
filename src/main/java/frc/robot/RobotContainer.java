@@ -141,6 +141,9 @@ public class RobotContainer {
     }
 
     m_StartInTeleopUtility = new StartInTeleopUtility(drive::setPose);
+    // Provided drive class with utility to set robot if apriltag was used so not to set
+    // initial/startingPose pose
+    drive.setStartinTeleopUtility(m_StartInTeleopUtility);
 
     autoCommandManager = new AutoCommandManager(drive, m_pukerSubsystem);
 
@@ -248,7 +251,7 @@ public class RobotContainer {
     // Switch to X pattern when X button is pressed
     controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
-    // Reset gyro to 0° when B button is pressed
+    // Reset gyro to 0° when B button is pressed
     controller
         .b()
         .onTrue(
