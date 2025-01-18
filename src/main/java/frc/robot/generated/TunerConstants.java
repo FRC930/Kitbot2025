@@ -69,10 +69,10 @@ public class TunerConstants {
           .withKD(0)
           // .withKS(0.12275) // STD Simple FF Characterized
           // .withKS(0.882313872) // SysID Results
-          .withKS(0.12930) // Fast Simple FF Characterized
+          .withKS(0.12930 * TunerConstants.kDriveGearRatio) // Fast Simple FF Characterized
           // .withKV(0.86980) // STD Simple FF Characterized
           // .withKV(1.153797072) // SysID Results
-          .withKV(0.73456) // Fast Simple FF Characterized
+          .withKV(0.73456 * TunerConstants.kDriveGearRatio) // Fast Simple FF Characterized
           .withKA(0.004537634 * TunerConstants.kDriveGearRatio);
   // The closed-loop output type to use for the steer motors;
   // This affects the PID/FF gains for the steer motors

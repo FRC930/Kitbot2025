@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -18,6 +19,12 @@ public class AutoCommandManager {
   private final LoggedDashboardChooser<Command> autoChooser;
 
   public AutoCommandManager(Drive drive, PukerSubsystem puker) {
+    // Set the logger to log to the first flashdrive plugged in
+    SignalLogger.setPath("/media/sda1/");
+
+    SignalLogger.start();
+
+    // SignalLogger.enableAutoLogging(true);
     configureNamedCommands(puker, drive);
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
