@@ -67,6 +67,7 @@ public class RobotContainer {
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
+  private final CommandXboxController co_controller = new CommandXboxController(1);
 
   private final Vision vision;
 
@@ -167,6 +168,10 @@ public class RobotContainer {
         .rightTrigger()
         .onTrue(m_pukerSubsystem.newStartMotorCommand())
         .onFalse(m_pukerSubsystem.newReverseMotorCommand());
+    co_controller
+        .rightTrigger()
+        .onTrue(m_pukerSubsystem.newStartMotorCommand())
+        .onFalse(m_pukerSubsystem.newReverseMotorCommand());
     // Lock to 0° when A button is held
     controller
         .a()
@@ -218,6 +223,10 @@ public class RobotContainer {
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     controller
+        .rightTrigger()
+        .onTrue(m_pukerSubsystem.newStartMotorCommand())
+        .onFalse(m_pukerSubsystem.newReverseMotorCommand());
+    co_controller
         .rightTrigger()
         .onTrue(m_pukerSubsystem.newStartMotorCommand())
         .onFalse(m_pukerSubsystem.newReverseMotorCommand());
