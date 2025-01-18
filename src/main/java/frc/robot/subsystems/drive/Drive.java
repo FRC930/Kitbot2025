@@ -140,7 +140,7 @@ public class Drive extends SubsystemBase {
         this::getChassisSpeeds,
         this::runVelocity,
         new PPHolonomicDriveController(
-            new PIDConstants(0.0, 0.0, 0.0), new PIDConstants(0.0, 0.0, 0.0)),
+            new PIDConstants(20.0, 0.0, 0.0), new PIDConstants(5.0, 0.0, 0.0)),
         PP_CONFIG,
         () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
         this);
@@ -160,10 +160,7 @@ public class Drive extends SubsystemBase {
     sysId =
         new SysIdRoutine(
             new SysIdRoutine.Config(
-                null,
-                null,
-                null,
-                (state) -> Logger.recordOutput("Drive/SysIdState", state.toString())),
+                null, null, null, (state) -> SignalLogger.writeString("state", state.toString())),
             new SysIdRoutine.Mechanism(
                 (voltage) -> runCharacterization(voltage.in(Volts)), null, this));
   }
@@ -278,20 +275,14 @@ public class Drive extends SubsystemBase {
 
   /** Returns a command to run a quasistatic test in the specified direction. */
   public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
-    return run(() -> SignalLogger.start())
-        .andThen(() -> runCharacterization(0.0))
+    return run(() -> runCharacterization(0.0))
         .withTimeout(1.0)
-        .andThen(sysId.quasistatic(direction))
-        .andThen(() -> SignalLogger.stop());
+        .andThen(sysId.quasistatic(direction));
   }
 
   /** Returns a command to run a dynamic test in the specified direction. */
   public Command sysIdDynamic(SysIdRoutine.Direction direction) {
-    return run(() -> SignalLogger.start())
-        .andThen(() -> runCharacterization(0.0))
-        .withTimeout(1.0)
-        .andThen(sysId.dynamic(direction))
-        .andThen(() -> SignalLogger.stop());
+    return run(() -> runCharacterization(0.0)).withTimeout(1.0).andThen(sysId.dynamic(direction));
   }
 
   /** Returns the module states (turn angles and drive velocities) for all of the modules. */
