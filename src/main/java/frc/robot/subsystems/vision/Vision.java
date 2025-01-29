@@ -102,8 +102,9 @@ public class Vision extends SubsystemBase {
       for (var observation : inputs[cameraIndex].poseObservations) {
         // Check whether to reject pose
         boolean rejectPose =
-            rejectPose(observation)
-                || observation.tagCount() == 0 // Must have at least one tag
+            // rejectPose(observation)
+            // ||
+            observation.tagCount() == 0 // Must have at least one tag
                 || (observation.tagCount() == 1
                     && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
                 // TODO Determine why they want about 2.4 ft off ground???
@@ -126,6 +127,10 @@ public class Vision extends SubsystemBase {
 
         // Skip if rejected
         if (rejectPose) {
+          continue;
+        }
+
+        if (rejectPose(observation)) {
           continue;
         }
 
