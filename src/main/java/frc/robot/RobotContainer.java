@@ -285,7 +285,7 @@ public class RobotContainer {
       // again)
       vision.updateStartingPosition();
       // Turn on updating odometry based on Apriltags
-      vision.disableUpdateOdometryBasedOnApriltags();
+      vision.enableUpdateOdometryBasedOnApriltags();
       m_TeleopInitialized = true;
       SignalLogger.setPath("/media/sda1/");
       SignalLogger.start();

@@ -55,7 +55,7 @@ public class AprilTagVision extends Vision {
 
     // Can disable specific type of observation
     if (observation.type() == PoseObservationType.MEGATAG_2) {
-      return true;
+      return false;
     }
     return super.rejectPose(observation);
   }
