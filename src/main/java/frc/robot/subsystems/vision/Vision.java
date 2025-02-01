@@ -102,8 +102,8 @@ public class Vision extends SubsystemBase {
       for (var observation : inputs[cameraIndex].poseObservations) {
         // Check whether to reject pose
         boolean rejectPose =
-            // rejectPose(observation)
-            // ||
+            rejectPose(observation)
+            ||
             observation.tagCount() == 0 // Must have at least one tag
                 || (observation.tagCount() == 1
                     && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
@@ -130,9 +130,6 @@ public class Vision extends SubsystemBase {
           continue;
         }
 
-        if (rejectPose(observation)) {
-          continue;
-        }
 
         // Calculate standard deviations
         double stdDevFactor =

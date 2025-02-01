@@ -2,20 +2,17 @@ package frc.robot.subsystems.vision;
 
 import static frc.robot.subsystems.vision.VisionConstants.aprilTagLayout;
 
-import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Robot;
 import frc.robot.subsystems.vision.VisionIO.PoseObservation;
 import frc.robot.subsystems.vision.VisionIO.PoseObservationType;
-import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Consumer;
 import org.littletonrobotics.junction.Logger;
@@ -23,7 +20,7 @@ import org.littletonrobotics.junction.Logger;
 public class AprilTagVision extends Vision {
 
   // Allow robot to turn off updating odometry
-  private boolean m_updateOdometryBaseOnApriltags = false;
+  private boolean m_updateOdometryBaseOnApriltags = true;
   private Consumer<Pose2d> m_ResetPose;
 
   private boolean m_HasRunAutonomous = false;
@@ -37,13 +34,13 @@ public class AprilTagVision extends Vision {
     super(consumer, io);
     m_ResetPose = resetPose;
 
-    try {
-      aprilTagLayout = new AprilTagFieldLayout(Filesystem.getDeployDirectory() + "/output.json");
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
+    // try {
+    //   aprilTagLayout = new AprilTagFieldLayout(Filesystem.getDeployDirectory() + "/output.json");
+    // } catch (IOException e) {
+    //   // TODO Auto-generated catch block
+    //   e.printStackTrace();
+    //   throw new RuntimeException(e);
+    // }
   }
 
   @Override
@@ -54,8 +51,11 @@ public class AprilTagVision extends Vision {
     }
 
     // Can disable specific type of observation
-    if (observation.type() == PoseObservationType.MEGATAG_2) {
-      return false;
+    if (observation.type() == PoseObservationType.MEGATAG_1) {
+      //if the driverstation is in auto or teleop then reject megatag 1
+      if (DriverStation.isAutonomousEnabled() || DriverStation.isTeleopEnabled()) {
+        return true;
+      }
     }
     return super.rejectPose(observation);
   }

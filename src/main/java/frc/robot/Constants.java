@@ -26,7 +26,7 @@ public final class Constants {
   }
 
   // When changing Mode.SIM to Mode.REPLAY, also change SimGui default flag in build.gradle
-  public static final Mode simMode = Mode.REPLAY;
+  public static final Mode simMode = Mode.SIM;
   public static final Mode currentMode = RobotBase.isReal() ? Mode.REAL : simMode;
 
   public static enum Mode {
