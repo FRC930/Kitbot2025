@@ -59,8 +59,8 @@ public class RobotContainer {
 
   private final PukerSubsystem m_pukerSubsystem = new PukerSubsystem(20, 0.10);
 
-  private final double DRIVE_SPEED = 0.3;
-  private final double ANGULAR_SPEED = 0.25;
+  private final double DRIVE_SPEED = 0.4;
+  private final double ANGULAR_SPEED = 0.35;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
