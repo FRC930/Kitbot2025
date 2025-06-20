@@ -52,7 +52,7 @@ public class AprilTagVision extends Vision {
 
     // Can disable specific type of observation
     if (observation.type() == PoseObservationType.MEGATAG_1) {
-      //if the driverstation is in auto or teleop then reject megatag 1
+      // if the driverstation is in auto or teleop then reject megatag 1
       if (DriverStation.isAutonomousEnabled() || DriverStation.isTeleopEnabled()) {
         return true;
       }
