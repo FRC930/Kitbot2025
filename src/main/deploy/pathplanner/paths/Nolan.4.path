@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.282684426229508,
+        "y": 7.027920081967213
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.1098360655737705,
+        "y": 6.63232581967213
+      },
+      "isLocked": false,
+      "linkedName": "Nolan.3"
+    },
+    {
+      "anchor": {
+        "x": 3.788114754098361,
+        "y": 5.205788934426229
+      },
+      "prevControl": {
+        "x": 2.8530737704918034,
+        "y": 5.697284836065574
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -56.97613244420319
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -51.581944655178035
+  },
+  "useDefaultConstraints": true
+}
