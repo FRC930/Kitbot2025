@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.1508196721311474,
-        "y": 7.051895491803278
+        "x": 1.1660472972972975,
+        "y": 7.0092905405405395
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9180327868852458,
-        "y": 6.608350409836065
+        "x": 1.9332604120513959,
+        "y": 6.565745458573327
       },
       "isLocked": false,
       "linkedName": "Cameron.3"
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 1.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -56.689369175439154
+    "rotation": 119.7169629066511
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -51.95295746817383
+    "rotation": 127.61466913532539
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

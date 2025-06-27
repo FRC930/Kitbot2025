@@ -41,6 +41,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "troughScoreCommand"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Logan.3"
