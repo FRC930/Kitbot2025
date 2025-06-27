@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.154713114754099,
-        "y": 5.163831967213115
+        "x": 5.23575,
+        "y": 5.41925
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.490368852459016,
-        "y": 6.170799180327868
+        "x": 5.571405737704918,
+        "y": 6.426217213114753
       },
       "isLocked": false,
       "linkedName": "Logan.0"
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 1.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -52.59464336859136
+    "rotation": 124.10574908040323
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.83553910026156
+    "rotation": 60.967224375419875
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
