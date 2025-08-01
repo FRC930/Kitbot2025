@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ProjectPathP1.0"
+            "pathName": "ProjectPathPP.0"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ProjectPathP1.1"
+            "pathName": "ProjectPathPP.1"
           }
         },
         {
@@ -37,7 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ProjectPathP2"
+            "pathName": "ProjectPathPP.2"
           }
         },
         {
@@ -51,5 +51,5 @@
   },
   "resetOdom": true,
   "folder": null,
-  "choreoAuto": true
+  "choreoAuto": false
 }

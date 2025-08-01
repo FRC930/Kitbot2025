@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.318174342105263,
+        "y": 0.9845394736842104
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.232236842105263,
+        "y": 1.7061677631578949
+      },
+      "isLocked": false,
+      "linkedName": "ProjectPathPP.1"
+    },
+    {
+      "anchor": {
+        "x": 3.7236019736842105,
+        "y": 2.8319078947368417
+      },
+      "prevControl": {
+        "x": 2.8384046052631584,
+        "y": 2.1487664473684207
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -119.99999999999999
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -127.05652818940959
+  },
+  "useDefaultConstraints": true
+}
