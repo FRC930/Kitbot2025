@@ -1,0 +1,73 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nolan.0"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "troughScoreCommand"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nolan.1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nolan.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "troughScoreCommand"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nolan.3"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Nolan.4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "troughScoreCommand"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
