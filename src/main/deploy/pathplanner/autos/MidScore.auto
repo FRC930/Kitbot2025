@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ProjectPath.0"
+            "pathName": "MidScore.0"
           }
         },
         {
@@ -21,5 +21,5 @@
   },
   "resetOdom": true,
   "folder": null,
-  "choreoAuto": true
+  "choreoAuto": false
 }
