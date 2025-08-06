@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Score2Left.0"
+            "pathName": "Score2Right.0"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Score2Left.1"
+            "pathName": "Score2Right.1"
           }
         },
         {
@@ -37,7 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Score2Left.2"
+            "pathName": "Score2Right.2"
           }
         },
         {
