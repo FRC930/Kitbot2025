@@ -42,7 +42,8 @@ public class AutoCommandManager {
   }
 
   public void configureNamedCommands(PukerSubsystem puker, Drive drivetrain) {
-    NamedCommands.registerCommand("troughScoreCommand",
+    NamedCommands.registerCommand(
+        "troughScoreCommand",
         puker
             .newStartMotorCommand()
             .alongWith(new WaitCommand(1))

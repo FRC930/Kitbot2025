@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.263075657894737,
-        "y": 5.37771381578947
+        "x": 5.1832465277777775,
+        "y": 5.171006944444444
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.089884868421052,
-        "y": 6.17631578947368
+        "x": 5.010055738304093,
+        "y": 5.969608918128654
       },
       "isLocked": false,
       "linkedName": "Score2Left.0"
@@ -58,13 +58,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 127.05652818941
+    "rotation": 127.05652818941002
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 60
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": false
 }
