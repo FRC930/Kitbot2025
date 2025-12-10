@@ -25,8 +25,14 @@ import static frc.robot.subsystems.vision.VisionConstants.robotToCameraBack;
 import static frc.robot.subsystems.vision.VisionConstants.robotToCameraFront;
 
 import com.ctre.phoenix6.SignalLogger;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -44,8 +50,10 @@ import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.vision.AprilTagVision;
 import frc.robot.subsystems.vision.VisionIO;
-import frc.robot.subsystems.vision.VisionIOLimelight;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
+import gg.questnav.questnav.PoseFrame;
+import gg.questnav.questnav.QuestNav;
+import org.littletonrobotics.junction.Logger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -72,6 +80,20 @@ public class RobotContainer {
 
   private boolean m_TeleopInitialized = false;
 
+  private QuestNav questNav = new QuestNav();
+  private Matrix<N3, N1> QUESTNAV_STD_DEVS =
+      VecBuilder.fill(
+          0.02, // Trust down to 2cm in X direction
+          0.02, // Trust down to 2cm in Y direction
+          0.035 // Trust down to 2 degrees rotational
+          );
+
+  private final Transform2d ROBOT_TO_QUEST =
+      new Transform2d(
+          Units.inchesToMeters(0.5), Units.inchesToMeters(9.207), Rotation2d.fromDegrees(90));
+
+  private int questDebug = 0;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
@@ -84,12 +106,9 @@ public class RobotContainer {
                 new ModuleIOTalonFX(TunerConstants.BackLeft),
                 new ModuleIOTalonFX(TunerConstants.BackRight));
 
-        vision =
-            new AprilTagVision(
-                drive::setPose,
-                drive::addVisionMeasurement,
-                new VisionIOLimelight(limelightFrontName, drive::getRotation),
-                new VisionIOLimelight(limelightBackName, drive::getRotation));
+        vision = new AprilTagVision(drive::setPose, drive::addVisionMeasurement);
+        // new VisionIOLimelight(limelightFrontName, drive::getRotation),
+        // new VisionIOLimelight(limelightBackName, drive::getRotation));
 
         // Real robot, instantiate hardware IO implementations
         break;
@@ -134,6 +153,10 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+
+    // Initialize Quest Pose
+    Pose2d initialPose = new Pose2d(1.0, 2.0, Rotation2d.fromDegrees(90));
+    questNav.setPose(initialPose);
   }
 
   /**
@@ -290,5 +313,68 @@ public class RobotContainer {
       SignalLogger.setPath("/media/sda1/");
       SignalLogger.start();
     }
+  }
+
+  public void robotPeriodic() {
+    updateVisionPose();
+  }
+
+  public void updateVisionPose() {
+
+    questNav.commandPeriodic(); // Process command responses
+
+    Logger.recordOutput("QuestNav930/QuestIsConnected", questNav.isConnected());
+    Logger.recordOutput("QuestNav930/QuestIsTracking", questNav.isTracking());
+    Logger.recordOutput("QuestNav930/QuestDebug", questDebug);
+
+    if (questDebug++ > 50) {
+      questDebug = 0;
+    }
+
+    // Monitor connection and device status
+    if (questNav.isConnected() && questNav.isTracking()) {
+
+      // Get latest pose data
+      PoseFrame[] newFrames = questNav.getAllUnreadPoseFrames();
+      for (PoseFrame questFrame : newFrames) {
+        // Use frame.questPose() and frame.dataTimestamp() with pose estimator
+
+        // Get the pose of the Quest
+        // Pose3d questPose = questFrame.questPose();
+        Pose2d questPose = questFrame.questPose();
+        // Get timestamp for when the data was sent
+        double timestamp = questFrame.dataTimestamp();
+
+        Logger.recordOutput("QuestNav930/QuestPose", questPose);
+        Logger.recordOutput("QuestNav930/Timestamp", timestamp);
+
+        // Transform quest to robot pose
+        Pose2d robotPose = questPose.transformBy(ROBOT_TO_QUEST.inverse());
+
+        drive.addVisionMeasurement(robotPose, timestamp, QUESTNAV_STD_DEVS);
+      }
+
+      // Quest is connected and tracking - safe to use pose data
+    }
+    /*
+    if (questNav.isConnected()) {
+      questNav.updateAverageRobotPose();
+      //   drivetrain.addVisionMeasurement(
+      //       questNav.getRobotPose(), VecBuilder.fill(0.0, 0.0, 9999999.0));
+      drivetrain.addVisionMeasurement(
+          questNav.getAverageRobotPose(), VecBuilder.fill(0.0, 0.0, 0.0));
+      return;
+    }
+      */
+
+    // LimelightHelpers.PoseEstimate limelightMeasurement =
+    // visionApriltagSubsystem.getPoseEstimate();
+    // if (limelightMeasurement.tagCount >= 2
+    //     || (limelightMeasurement.tagCount == 1 && limelightMeasurement.avgTagDist < 1.25)) {
+    //   drivetrain.addVisionMeasurement(
+    //       limelightMeasurement.pose,
+    //       limelightMeasurement.timestampSeconds,
+    //       VecBuilder.fill(.6, .6, 9999999));
+    // }
   }
 }

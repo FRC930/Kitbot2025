@@ -221,6 +221,62 @@ public class Drive extends SubsystemBase {
 
     // Update gyro alert
     gyroDisconnectedAlert.set(!gyroInputs.connected && Constants.currentMode != Mode.SIM);
+
+    // questNav.commandPeriodic();
+
+    // Logger.recordOutput("QuestNav930/QuestIsTracking", questNav.isTracking());
+
+    // First, Declare our geometrical transform from the robot center to the Quest
+    // Transform3d ROBOT_TO_QUEST = new Transform3d( /*TODO: Put your x, y, z, yaw, pitch, and roll
+    // offsets here!*/ );
+
+    // Get the latest pose data frames from the Quest
+    // PoseFrame[] poseFrames = questNav.getAllUnreadPoseFrames();
+
+    // Logger.recordOutput("QuestNav930/PoseFramesLen", poseFrames.length);
+
+    /*
+    if (poseFrames.length > 0) {
+      // Get the most recent Quest pose
+      Pose2d questPose2 = poseFrames[poseFrames.length - 1].questPose();
+
+      Logger.recordOutput("QuestNav930/QuestPose2", questPose2);
+
+      // Transform by the mount pose to get your robot pose
+      // Pose2d robotPose = questPose.transformBy(ROBOT_TO_QUEST.inverse());
+    }
+      */
+
+    /* Was working
+
+    if (questNav.isTracking()) {
+    //if (true) {
+      // Get the latest pose data frames from the Quest
+      PoseFrame[] questFrames = questNav.getAllUnreadPoseFrames();
+
+      // Loop over the pose data frames and send them to the pose estimator
+      for (PoseFrame questFrame : questFrames) {
+        // Get the pose of the Quest
+        // Pose3d questPose = questFrame.questPose();
+        Pose2d questPose = questFrame.questPose();
+        // Get timestamp for when the data was sent
+        double timestamp = questFrame.dataTimestamp();
+
+        // Transform by the mount pose to get your robot pose
+        // Pose2d robotPose = questPose.transformBy(QuestNavConstants.ROBOT_TO_QUEST.inverse());
+
+        // You can put some sort of filtering here if you would like!
+
+        // Add the measurement to our estimator
+        // swerveDriveSubsystem.addVisionMeasurement(robotPose.toPose2d(), timestamp,
+        // QUESTNAV_STD_DEVS);
+
+        Logger.recordOutput("QuestNav930/QuestPose", questPose);
+        Logger.recordOutput("QuestNav930/Timestamp", timestamp);
+      }
+
+    }
+    */
   }
 
   /**
